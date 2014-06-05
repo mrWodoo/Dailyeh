@@ -15,4 +15,6 @@
  * Index route
  */
 Route::get('/', 'DailyController@getIndex');
-Route::any('/login', 'LoginController@loginForm');
+Route::any('/login', 'AuthController@loginForm');
+Route::any( '/logout', 'AuthController@logout' );
+Route::any( '/students', 'StudentController@listStudents' );

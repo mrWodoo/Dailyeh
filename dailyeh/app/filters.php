@@ -38,7 +38,7 @@ Route::filter('auth', function()
         // We check if current client is logged in
         // if not, we redirect him to login page
         if( Session::get( 'user.admin' ) != true ) {
-            return Redirect::action( 'LoginController@loginForm' );
+            return Redirect::action( 'AuthController@loginForm' );
         }
     }
 });

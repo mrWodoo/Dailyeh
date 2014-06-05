@@ -1,12 +1,13 @@
 <?php
 
-class LoginController extends BaseController {
+class AuthController extends BaseController {
     /**
      * Display login form
      *
+     * @param bool $loggedOut Show 'logged out' box?
      * @return mixed
      */
-    public function loginForm() {
+    public function loginForm( $loggedOut = false ) {
         // We check if current client is logged in
         // if yes, redirect to index
         if( Session::get( 'user.admin' ) == true ) {
@@ -38,8 +39,22 @@ class LoginController extends BaseController {
         } else {
             return View::make( 'login', array(
                 'loginProcessed' => $loginProcessed,
-                'loginFailed' => $loginFailed
+                'loginFailed' => $loginFailed,
+                'loggedOut' => $loggedOut
             ) );
         }
+    }
+
+    /**
+     * Logout
+     *
+     * @return mixed
+     */
+    public function logout() {
+        if( Session::get( 'user.admin' ) ) {
+            Session::set( 'user.admin', false );
+        }
+
+        return $this->loginForm( true );
     }
 }

@@ -1,0 +1,16 @@
+div.header-icons {
+    text-align: left;
+    margin-top: 25px;
+}
+
+div.header-icons a {
+    margin-left: 0.8%;
+}
+
+div.header {
+    border-bottom: 1px #EBEBEB solid;
+}
+
+.margin-top-small {
+    margin-top: 15px;
+}
