@@ -28,24 +28,19 @@ App::after(function($request, $response)
 |--------------------------------------------------------------------------
 |
 | The following filters are used to verify that the user of the current
-| session is logged into this application. The "basic" filter easily
-| integrates HTTP Basic authentication for quick, simple checking.
+| session is logged into this application.
 |
 */
 
 Route::filter('auth', function()
 {
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
-		}
-	}
+    if( Route::getCurrentRoute()->getPath() != 'login' ) {
+        // We check if current client is logged in
+        // if not, we redirect him to login page
+        if( Session::get( 'user.admin' ) != true ) {
+            return Redirect::action( 'LoginController@loginForm' );
+        }
+    }
 });
 
 

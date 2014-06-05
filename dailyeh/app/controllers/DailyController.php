@@ -2,13 +2,19 @@
 
 class DailyController extends BaseController {
 
+    /**
+     * Constructor. Adds filter to controller
+     */
+    public function __construct() {
+        $this->beforeFilter( 'auth' );
+    }
+
+    /**
+     * Index page controller
+     * @return mixed
+     */
     public function getIndex()
     {
-        // We check if current client is logged in
-        // if not, we redirect him to login page
-        if( Session::get( 'user.admin' ) != true ) {
-            return Redirect::action( 'LoginController@loginForm' );
-        }
     }
 
 }

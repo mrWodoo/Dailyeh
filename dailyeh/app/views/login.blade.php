@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta charset="utf-8">
-    <title>xxx</title>
+    <title>Logowanie do systemu</title>
 
     <link href="{{ URL::asset('css/login.css') }}" rel="stylesheet">
 
@@ -24,12 +24,17 @@
 <body>
 
     <div class="container">
+        <form class="form-signin" role="form" method="POST">
+            @if ( $loginProcessed and $loginFailed )
+            <div class="alert alert-danger">Złe dane logowania!</div>
+            @endif
 
-        <form class="form-signin" role="form">
             <h2 class="form-signin-heading">Zaloguj się</h2>
-            <input type="email" class="form-control" placeholder="Login administratora" required autofocus>
-            <input type="password" class="form-control" placeholder="Hasło" required>
+            <input type="text" class="form-control" placeholder="Login administratora" name="login" required autofocus>
+            <input type="password" class="form-control" placeholder="Hasło" name="password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj się</button>
+
+
         </form>
 
     </div>
