@@ -6,9 +6,11 @@ class StudentController extends BaseController {
      * @return mixed
      */
     public function listStudents() {
-        $student = new Student;
-        $student->name = 'Jan';
-        $student->surname = 'Kowalski';
-        $student->save();
+        //Fetch students from database
+        $students = Student::all();
+
+        return View::make( 'studentsList', array(
+            'students' => $students
+        ) );
     }
 }
