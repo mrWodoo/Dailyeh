@@ -9,7 +9,7 @@
     if( count( $students) ) {
 
     ?>
-    <div>
+    <div class="table-responsive">
         <h2>Lista uczniów</h2>
         <table class="table table-striped">
             <thead>
@@ -38,7 +38,7 @@
                             <span class="glyphicon glyphicon-cog"></span>
                         </button>
 
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">
+                        <button onClick="removeStudent( <?php echo $student->id; ?> )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
@@ -73,16 +73,32 @@
                         <h3 class="panel-title">Wypełnij poniższe pola</small></h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" method="post" id="addStudentForm">
                             <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" name="name" class="form-control input-sm" placeholder="Imię ucznia">
                                     </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <input type="text" name="surname" class="form-control input-sm" placeholder="Nazwisko ucznia">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="pesel" class="form-control input-sm" placeholder="Pesel ucznia">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="text" name="street_address" class="form-control input-sm" placeholder="Adres zamieszkania">
                                     </div>
                                 </div>
                             </div>
