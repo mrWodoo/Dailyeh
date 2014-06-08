@@ -29,11 +29,11 @@
 <?php if( !isset( $loginPage ) ) { ?>
     <div class="container header">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" style="min-width: 300px;">
                 <h1>Dziennik ucznia</h1>
             </div>
 
-            <div class="col-md-8 header-icons">
+            <div class="col-md-2 header-icons">
 
                 <a href="{{URL::to('/')}}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Strona Główna">
                     <span class="glyphicon glyphicon-home"></span>

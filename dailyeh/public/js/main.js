@@ -61,10 +61,13 @@ $( document ).ready( function() {
 
 
                         $( row ).show( 'slow' );
-
                         $( 'html, body' ).animate( { scrollTop: $( row ).offset().top }, 'slow' );
 
+                        // Reset form inputs
                         $( '#addStudentForm')[0].reset();
+
+                        // Update counter
+                        $( '#studentsCount').html( $( 'tr' ).length ) - 1;
                     }
                 }
             });
@@ -102,10 +105,14 @@ function removeStudent( studentId, token ) {
             if( error.length > 0 ) {
                 alert( error.text() );
             } else {
-                var response = $( data).find( 'response' );
+                var response = $( data ).find( 'response' );
 
                 if( response.length > 0 ) {
-                    $( '#student_' + id).hide( 'slow', function() {  this.remove(); } );
+                    $( '#student_' + id).hide( 'slow', function() {
+                        this.remove();
+                        // Update counter
+                        $( '#studentsCount').html( parseInt( $( '#studentsCount').text() ) - 1 );
+                    });
                 } else {
                     alert( 'Serwer nie zwrócił poprawnej odpowiedzi, nie można usunąć wpisu!' )
                 }

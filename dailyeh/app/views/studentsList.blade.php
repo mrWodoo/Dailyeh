@@ -10,7 +10,7 @@
 
     ?>
     <div class="table-responsive">
-        <h2>Lista uczniów</h2>
+        <h2>Lista uczniów <small><?php echo ( count( $students ) != 1 ) ? '<span id="studentsCount">' .count( $students ) . '</span> uczniów' : '<span id="studentsCount">1</span> uczeń' ?> </small></h2>
         <table class="table table-striped" id="students">
             <thead>
                 <tr>
