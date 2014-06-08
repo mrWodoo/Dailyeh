@@ -11,11 +11,13 @@
     ?>
     <div class="table-responsive">
         <h2>Lista uczniów</h2>
-        <table class="table table-striped">
+        <table class="table table-striped" id="students">
             <thead>
                 <tr>
                     <th>Imię</th>
                     <th>Nazwisko</th>
+                    <th>PESEL</th>
+                    <th>Adres zamieszkania</th>
                     <th>Dodano</th>
                     <th>Ostatnia aktualizacja</th>
                     <th>Akcje</th>
@@ -29,8 +31,10 @@
 
             ?>
                 <tr id="student_<?php echo $student->id; ?>">
-                    <td id="studentName"><?php echo $student->name; ?></td>
-                    <td id="student_surname"><?php echo $student->surname; ?></td>
+                    <td id="name"><?php echo $student->name; ?></td>
+                    <td id="surname"><?php echo $student->surname; ?></td>
+                    <td id="pesel"><?php echo $student->surname; ?></td>
+                    <td id="street_address"><?php echo $student->surname; ?></td>
                     <td><?php echo $student->created_at; ?></td>
                     <td><?php echo $student->updated_at; ?></td>
                     <td>
@@ -38,7 +42,7 @@
                             <span class="glyphicon glyphicon-cog"></span>
                         </button>
 
-                        <button onClick="removeStudent( <?php echo $student->id; ?> )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">
+                        <button onClick="removeStudent( <?php echo $student->id; ?>, '<?php echo csrf_token(); ?>' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
@@ -104,6 +108,8 @@
                             </div>
 
                             <input type="submit" value="Dodaj" class="btn btn-info btn-block">
+
+                            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 
                         </form>
                     </div>

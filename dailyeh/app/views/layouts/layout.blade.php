@@ -47,7 +47,7 @@
                     <span class="glyphicon glyphicon-time"></span>
                 </a>
 
-                <a href="{{URL::to('/logout')}}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Wyloguj się">
+                <a href="{{URL::to('/logout')}}/<?php echo csrf_token(); ?>" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Wyloguj się">
                     <span class="glyphicon glyphicon-log-out"></span>
                 </a>
 

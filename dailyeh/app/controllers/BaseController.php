@@ -15,4 +15,14 @@ class BaseController extends Controller {
 		}
 	}
 
+    /**
+     * Display page with some message
+     *
+     * @param string $message
+     * @return mixed
+     */
+    public function message( $message ) {
+        return View::make( 'message', array( 'message' => $message ) );
+    }
+
 }

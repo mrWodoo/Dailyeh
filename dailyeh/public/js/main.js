@@ -27,7 +27,45 @@ $( document ).ready( function() {
                     alert( 'Napotkano problem przy wysłaniu żądania o dodanie ucznia!' );
                 },
                 success: function( data ) {
-                    alert( data );
+                    var error = $( data).find( 'error' );
+
+                    if( error.length > 0 ) {
+                        alert( error.text() );
+                    } else {
+                        var student = $( data ).find( "student" );
+
+                        var id = $( student).find( 'id').text();
+                        var rowId = 'student_' + id;
+
+                        $( '#students').append( '<tr style="display: none;" id="' + rowId + '"></tr>' );
+
+                        var row = $( '#' + rowId );
+
+                        $.each( student.find( '*' ), function( index, data ) {
+                            // We ignore id
+                            if( data.nodeName != 'id' ) {
+                                $( row ).append( '<td id="' + data.nodeName + '">' + $( data ).text() + '</td>' );
+                            }
+                        } );
+
+                        //Add actions
+                        $( row ).append( '<td>' +
+                            '<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">' +
+                                '<span class="glyphicon glyphicon-cog"></span>' +
+                            '</button>' +
+
+                            ' <button onClick="removeStudent( ' + id + ', \'' + $( '[name="_token"]' ).val() + '\' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">' +
+                                '<span class="glyphicon glyphicon-remove"></span>' +
+                            '</button>' +
+                        '</td>' );
+
+
+                        $( row ).show( 'slow' );
+
+                        $( 'html, body' ).animate( { scrollTop: $( row ).offset().top }, 'slow' );
+
+                        $( '#addStudentForm')[0].reset();
+                    }
                 }
             });
         }
@@ -37,16 +75,21 @@ $( document ).ready( function() {
 } );
 
 
-function removeStudent( studentId ) {
+function removeStudent( studentId, token ) {
     var id = parseInt( studentId );
 
+    var accept = confirm( 'Na pewn chcesz usunąć ucznia?' );
+
+    if( !accept ) {
+        return;
+    }
 
     if( id <= 0 ) {
         return;
     }
 
     $.ajax({
-        url: 'students/remove/' + id,
+        url: 'students/remove/' + id + '/' + token,
         type: 'get',
         cache: false,
         dataType: 'xml',

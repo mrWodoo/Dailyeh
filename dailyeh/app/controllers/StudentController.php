@@ -18,8 +18,17 @@ class StudentController extends BaseController {
      * Remove student
      *
      * @param int $id
+     * @param string $token CSRF token
      */
-    public function removeStudent( $id ) {
+    public function removeStudent( $id, $token ) {
+        if( $token != csrf_token() ) {
+            $response = Response::make( XMLHelper::ajaxError( 'Błędny token CSRF!' ) );
+
+            XMLHelper::setHeaders( $response );
+
+            return $response;
+        }
+
         // Just to be sure
         $id = (int) $id;
 

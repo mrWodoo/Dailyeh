@@ -50,7 +50,11 @@ class AuthController extends BaseController {
      *
      * @return mixed
      */
-    public function logout() {
+    public function logout( $token ) {
+        if( $token != csrf_token() ) {
+            return $this->message( 'Wylogowanie może odbyć się tylko przez kliknięcie przycisku \'<b>Wyloguj</b>\'!' );
+        }
+
         if( Session::get( 'user.admin' ) ) {
             Session::set( 'user.admin', false );
         }
