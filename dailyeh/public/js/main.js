@@ -3,7 +3,7 @@ $( document ).ready( function() {
     $( '[data-toggle="tooltip"]').tooltip();
 
     //Add new student
-    $( '#addStudentForm').submit( function() {
+    $( '#addStudentForm' ).submit( function() {
         var name = $( this).find( '[name="name"]').val();
         var surname = $( this).find( '[name="surname"]').val();
         var pesel = $( this).find( '[name="pesel"]').val();
@@ -34,7 +34,7 @@ $( document ).ready( function() {
                     } else {
                         var student = $( data ).find( "student" );
 
-                        var id = $( student).find( 'id').text();
+                        var id = $( student ).find( 'id' ).text();
                         var rowId = 'student_' + id;
 
                         $( '#students').append( '<tr style="display: none;" id="' + rowId + '"></tr>' );
@@ -44,20 +44,30 @@ $( document ).ready( function() {
                         $.each( student.find( '*' ), function( index, data ) {
                             // We ignore id
                             if( data.nodeName != 'id' ) {
-                                $( row ).append( '<td id="' + data.nodeName + '">' + $( data ).text() + '</td>' );
+                                $( row ).append( '<td id="' + data.nodeName + '" data-fillable="true"></td>' );
+                                $( row ).find( '#' + data.nodeName ).text( $( data ).text() );
                             }
                         } );
 
                         //Add actions
-                        $( row ).append( '<td>' +
-                            '<button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">' +
+                        $( row ).append( '<td><div id="beforeEdit">' +
+                            '<button id="buttonEdit" onClick="editStudent( ' + rowId + ' )" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">' +
                                 '<span class="glyphicon glyphicon-cog"></span>' +
                             '</button>' +
 
                             ' <button onClick="removeStudent( ' + id + ', \'' + $( '[name="_token"]' ).val() + '\' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">' +
                                 '<span class="glyphicon glyphicon-remove"></span>' +
                             '</button>' +
-                        '</td>' );
+                        '</div>' +
+                        "                        <div id=\"onEdit\">" +
+                        "<button onClick=\"saveStudent( student_" + id + ", " + id + " )\" type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Zapisz\">" +
+                            "<span class=\"glyphicon glyphicon-ok\"></span>" +
+                            "</button> "+
+
+                            "<button onClick=\"cancelStudent( student_" + id + " )\" type=\"button\" class=\"btn btn-warning btn-sm\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Anuluj\">" +
+                                "<span class=\"glyphicon glyphicon-remove\"></span>" +
+                            "</button>" +
+                        "</div></td>");
 
 
                         $( row ).show( 'slow' );
@@ -118,5 +128,81 @@ function removeStudent( studentId, token ) {
                 }
             }
         }
+    });
+}
+
+function editStudent( row ) {
+    var fillables = $( row ).find( '[data-fillable="true"]' );
+    var dataCopy = {};
+
+    // Hide 'edit' and 'remove' button
+    $( row ).find( '#beforeEdit').css( 'display', 'none' );
+
+    //Show 'save' and 'cancel' button
+    $( row ).find( '#onEdit').css( 'display', 'block' );
+
+    $.each( fillables, function( index, node ) {
+        var value = $( node ).html();
+        var field = $( node ).attr( 'id' );
+
+        dataCopy[ field ] = value;
+
+        $( node ).html( '<input type="text" id="input_' + field + '" value="' + value + '">' );
+    });
+}
+
+function saveStudent( row, id ) {
+    var data = '';
+
+    $.each( $( row ).find( 'input' ), function( index, node ) {
+        data += $( node ).attr( 'id').split( '_' )[1] + '=' + encodeURIComponent( $( node ).val() ) + '&';
+    });
+
+    $.ajax({
+        url: 'students/edit/' + id + '/' + $( '[name="_token"]').val(),
+        type: 'post',
+        data: data,
+        error: function() {
+            alert( 'Napotkano problem przy wysłaniu żądania o edycję ucznia!' );
+        },
+        success: function( data ) {
+            var error = $( data ).find( 'error' );
+
+            if( error.length > 0 ) {
+                alert( error.text() );
+            } else {
+                // Show 'edit' and 'remove' button
+                $( row ).find( '#beforeEdit').css( 'display', 'block' );
+
+                // Hide 'save' and 'cancel' button
+                $( row ).find( '#onEdit').css( 'display', 'none' );
+
+                var student = $( data ).find( 'student' );
+
+                var id = $( student ).find( 'id' ).text();
+                var rowId = 'student_' + id;
+
+                $.each( student.find( '*' ), function( index, node ) {
+                    // We ignore id
+                    if( data.nodeName != 'id' ) {
+                        $( row ).find( '#' + node.nodeName ).text( $( node ).text() );
+                    }
+                } );
+            }
+        }
+    });
+
+
+}
+
+function cancelStudent( row ) {
+    // Show 'edit' and 'remove' button
+    $( row ).find( '#beforeEdit').css( 'display', 'block' );
+
+    // Hide 'save' and 'cancel' button
+    $( row ).find( '#onEdit').css( 'display', 'none' );
+
+    $.each( $( row ).find( 'input' ), function( index, node ) {
+        $( node).replaceWith( $( node ).attr( 'value' ) );
     });
 }

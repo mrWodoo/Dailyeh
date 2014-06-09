@@ -8,12 +8,31 @@ class Student extends Eloquent {
     protected $table = 'students';
 
     /**
-     * Columns which can be updated and which are required when inserting
+     * Columns which can be updated
      *
      * @var array
      */
     protected $fillable = array( 'name', 'surname', 'pesel', 'street_address' );
+
+    /**
+     * Which columns are required on insert
+     *
+     * @var array
+     */
     protected $required = array( 'name', 'surname', 'pesel', 'street_addres' );
+
+    /**
+     * Which columns are shown at StudentController@listStudents
+     *
+     * @var array
+     */
+    protected $show = array(
+        'name' => 'Imię',
+        'surname' => 'Nazwisko',
+        'pesel' => 'PESEL',
+        'street_address' => 'Adres zamieszkania',
+        'created_at' => 'Dodano',
+        'updated_at' => 'Ostatnia aktualizacja');
 
     /**
      * Get fillable fields
@@ -31,6 +50,15 @@ class Student extends Eloquent {
      */
     public function required() {
         return $this->required;
+    }
+
+    /**
+     * Which fields to show on StudentController@listStudents
+     *
+     * @return array
+     */
+    public function toShow() {
+        return $this->show;
     }
 
     /**

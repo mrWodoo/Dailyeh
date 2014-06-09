@@ -15,3 +15,7 @@ div.header {
 .margin-top-small {
     margin-top: 15px;
 }
+
+div#onEdit {
+    display: none;
+}

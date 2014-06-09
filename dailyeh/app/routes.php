@@ -16,7 +16,7 @@
  */
 Route::get('/', 'DailyController@getIndex');
 Route::any('/login', 'AuthController@loginForm');
-Route::any( '/students', 'StudentController@listStudents' );
+Route::get( '/students', 'StudentController@listStudents' );
 
 /**
  * Group routes with CSRF filter
@@ -25,5 +25,7 @@ Route::group( array( 'before' => 'csrf' ), function()  {
     Route::post( '/students/add', 'StudentController@addStudent');
 });
 
-Route::any( '/logout/{token}', 'AuthController@logout' );
+Route::get( '/logout/{token}', 'AuthController@logout' );
 Route::get( '/students/remove/{id}/{token}', 'StudentController@removeStudent')->where('id', '[0-9]+');
+Route::post( '/students/edit/{id}/{token}', 'StudentController@editStudent')->where('id', '[0-9]+');
+Route::get( '/presence', 'PresenceController@index' );

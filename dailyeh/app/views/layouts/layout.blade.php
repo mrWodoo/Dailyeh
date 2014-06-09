@@ -43,7 +43,7 @@
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
 
-                <a href="{{URL::to('/')}}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Obecności">
+                <a href="{{URL::to('/presence')}}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom" title="Obecności">
                     <span class="glyphicon glyphicon-time"></span>
                 </a>
 

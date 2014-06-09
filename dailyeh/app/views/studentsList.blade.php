@@ -14,12 +14,13 @@
         <table class="table table-striped" id="students">
             <thead>
                 <tr>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
-                    <th>PESEL</th>
-                    <th>Adres zamieszkania</th>
-                    <th>Dodano</th>
-                    <th>Ostatnia aktualizacja</th>
+                    <?php
+                    foreach( $students[0]->toShow() AS $column => $translation ) {
+                    ?>
+                    <th><?php echo $translation; ?></th>
+                    <?
+                    }
+                    ?>
                     <th>Akcje</th>
                 </tr>
             </thead>
@@ -31,20 +32,35 @@
 
             ?>
                 <tr id="student_<?php echo $student->id; ?>">
-                    <td id="name"><?php echo $student->name; ?></td>
-                    <td id="surname"><?php echo $student->surname; ?></td>
-                    <td id="pesel"><?php echo $student->surname; ?></td>
-                    <td id="street_address"><?php echo $student->surname; ?></td>
-                    <td><?php echo $student->created_at; ?></td>
-                    <td><?php echo $student->updated_at; ?></td>
+                    <?php
+                    foreach( $student->toShow() AS $column => $translation ) {
+                    ?>
+                        <td id="<?php echo $column; ?>" data-fillable="<?php echo ( in_array(  $column, $student->fillables() ) ) ? 'true' : 'false'; ?>"><?php echo htmlspecialchars( $student->$column ); ?></td>
+                    <?
+                    }
+                    ?>
                     <td>
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </button>
+                        <div id="beforeEdit">
+                            <button id="buttonEdit" onClick="editStudent( <?php echo 'student_' . $student->id; ?> );" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </button>
 
-                        <button onClick="removeStudent( <?php echo $student->id; ?>, '<?php echo csrf_token(); ?>' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
+                            <button onClick="removeStudent( <?php echo $student->id; ?>, '<?php echo csrf_token(); ?>' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                         </div>
+
+
+                        <div id="onEdit">
+                            <button onClick="saveStudent( <?php echo 'student_' . $student->id; ?>, <?php echo $student->id; ?> )" type="button" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Zapisz">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+
+                            <button onClick="cancelStudent( <?php echo 'student_' . $student->id; ?> )" type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="bottom" title="Anuluj">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+
                     </td>
                 </tr>
             <?php
