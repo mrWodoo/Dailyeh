@@ -72,7 +72,11 @@ class Student extends Eloquent {
         $data = $this->attributesToArray();
 
         foreach( $data AS $key => $value ) {
-            $xml->addChild( $key, addslashes( $value ) );
+            $child = $xml->addChild( $key, addslashes( $value ) );
+
+            if( in_array( $key, $this->fillable ) ) {
+                $child->addAttribute( 'fillable', 'true' );
+            }
         }
 
         return $xml->asXML();

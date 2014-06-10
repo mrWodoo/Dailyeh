@@ -48,7 +48,7 @@ $( document ).ready( function() {
                             $.each( student.find( '*' ), function( index, data ) {
                                 // We ignore id
                                 if( data.nodeName != 'id' ) {
-                                    $( row ).append( '<td id="' + data.nodeName + '" data-fillable="true"></td>' );
+                                    $( row ).append( '<td id="' + data.nodeName + '" data-fillable="' + $( data ).attr( 'fillable' ) + '"></td>' );
                                     $( row ).find( '#' + data.nodeName ).text( $( data ).text() );
                                 }
                             } );
