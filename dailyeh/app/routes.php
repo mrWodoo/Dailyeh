@@ -23,9 +23,11 @@ Route::get( '/students', 'StudentController@listStudents' );
  */
 Route::group( array( 'before' => 'csrf' ), function()  {
     Route::post( '/students/add', 'StudentController@addStudent');
+    Route::post( '/presence/set', 'PresenceController@setPresence');
 });
 
 Route::get( '/logout/{token}', 'AuthController@logout' );
 Route::get( '/students/remove/{id}/{token}', 'StudentController@removeStudent')->where('id', '[0-9]+');
 Route::post( '/students/edit/{id}/{token}', 'StudentController@editStudent')->where('id', '[0-9]+');
 Route::get( '/presence', 'PresenceController@index' );
+Route::get( '/presence/{date}', array( 'as' => 'presenceView', 'uses' => 'PresenceController@view' ) )->where( 'date', '([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})' );

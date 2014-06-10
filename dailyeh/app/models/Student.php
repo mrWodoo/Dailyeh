@@ -77,4 +77,38 @@ class Student extends Eloquent {
 
         return $xml->asXML();
     }
+
+    /**
+     * Override 'deletion' because
+     * we need to remove also presence data
+     * for this student
+     *
+     * @return mixed
+     */
+    public function delete() {
+
+        DB::delete( '
+            DELETE FROM ' . DB::getTablePrefix() . 'students
+            WHERE id = ?', array( $this->id ) );
+
+        return parent::delete();
+    }
+
+    /**
+     * Get students' presence list
+     * This should be faster than Laravel's models' relations
+     *
+     * @param string $date Format YYYY-mm-dd
+     * @return array
+     */
+    public static function studentsPresent( $date ) {
+        $result = DB::select( '
+            SELECT students.*, students.id AS student, presence.*
+            FROM ' . DB::getTablePrefix() . 'students AS students
+            LEFT JOIN ' . DB::getTablePrefix() . 'presence AS  presence
+            ON students.id = presence.student_id
+            AND date = ?', array( $date ) );
+
+        return $result;
+    }
 }

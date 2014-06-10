@@ -37,4 +37,20 @@ class TranslationHelper {
 
         return $translations[ $month ];
     }
+
+    /**
+     * Translate presence format date (YYYY-mm-dd) to text (dd mm YYYY
+     *
+     * @param string $date
+     * @return string
+     */
+    public static function translateDate( $date ) {
+        $exp = explode( '-', $date );
+
+        if( substr( $exp[2], 0, 1 ) == 0 ) {
+            $exp[2] = substr( $exp[2], 1, strlen( $exp[2] ) );
+        }
+
+        return $exp[2] . ' ' . self::translateMonth( $exp[1] ) . ' ' . $exp[0];
+    }
 }

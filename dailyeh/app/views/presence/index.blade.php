@@ -17,15 +17,27 @@
 
     ?>
         <li>
-            <h2><?php echo TranslationHelper::translateMonth( $month ); ?></h2>
+            <h2><a href="#" onclick="showDays( '<?php echo 'date-' . $year . '-' . $month; ?>' );"><?php echo TranslationHelper::translateMonth( $month ); ?></a></h2>
+            <ul id="<?php echo 'date-' . $year . '-' . $month; ?>" style="display: none;">
             <?php
 
             foreach( $days AS $day => $data ) {
 
             ?>
-            <ul>
+
                 <li>
-                    <h2><?php echo $day; ?></h2>
+                    <h3>
+                        <a href="<?php echo URL::route( 'presenceView', array( $year . '-' . $month . '-' . $day ) ); ?>">
+                        <?php echo $day; ?>
+                        <?php
+                        if( !isset( $data['hadPresence'] ) || !$data['hadPresence'] ) {
+                        ?>
+                            <small><span class="label label-danger">Nieuzupełnione obecności</span></small>
+                        <?php
+                        }
+                        ?>
+                        </a>
+                    </h3>
                 </li>
             <?php
 

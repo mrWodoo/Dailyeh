@@ -206,3 +206,40 @@ function cancelStudent( row ) {
         $( node).replaceWith( $( node ).attr( 'value' ) );
     });
 }
+
+function showDays( id ) {
+
+    $( '#' + id ).toggle( 'slow' );
+}
+
+function setPresent( hour, studentId, date, present ) {
+    if( hour < 0 || hour >= 8 ) {
+        alert( 'Nie możesz definiować obecności na godzinie ósmiej i późniejszych!' );
+        return;
+    }
+
+    //Process form using post ajax
+    $.ajax({
+        url: 'set',
+        type: 'post',
+        data: 'present=' + parseInt( present ) + '&student_id=' + studentId + '&date=' + encodeURIComponent( date ) + '&hour=' + hour + '&_token=' + $( '[name="_token"]').val(),
+        error: function() {
+            alert( 'Napotkano problem przy wysłaniu żądania o ustawienie obecności!' );
+        },
+        success: function( data ) {
+            var error = $( data ).find( 'error' );
+
+            if( error.length > 0 ) {
+                alert( error.text() );
+            } else {
+                if( present ) {
+                    $( '#student_' + studentId ).find( '#hour_' + hour ).first().html( '<span class="glyphicon glyphicon-ok"></span>' );
+                } else {
+                    $( '#student_' + studentId ).find( '#hour_' + hour ).first().html( '<span class="glyphicon glyphicon-remove"></span>' );
+                }
+            }
+        }
+    });
+
+    return false;
+}
