@@ -161,7 +161,7 @@ function saveStudent( row, id ) {
     var data = '';
 
     $.each( $( row ).find( 'input' ), function( index, node ) {
-        data += $( node ).attr( 'id').split( '_' )[1] + '=' + encodeURIComponent( $( node ).val() ) + '&';
+        data += $( node ).attr( 'id').split( 'input_' )[1] + '=' + encodeURIComponent( $( node ).val() ) + '&';
     });
 
     $.ajax({
@@ -178,10 +178,10 @@ function saveStudent( row, id ) {
                 alert( error.text() );
             } else {
                 // Show 'edit' and 'remove' button
-                $( row ).find( '#beforeEdit').css( 'display', 'block' );
+                $( row ).find( '#beforeEdit' ).css( 'display', 'block' );
 
                 // Hide 'save' and 'cancel' button
-                $( row ).find( '#onEdit').css( 'display', 'none' );
+                $( row ).find( '#onEdit' ).css( 'display', 'none' );
 
                 var student = $( data ).find( 'student' );
 

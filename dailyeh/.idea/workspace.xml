@@ -26,7 +26,16 @@
       <file leaf-file-name="Student.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/Student.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="55" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-15.416667" vertical-offset="785" max-vertical-offset="1845">
+            <state line="77" column="55" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-48.125" vertical-offset="0" max-vertical-offset="1845">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StudentController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/StudentController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="141" column="32" selection-start="4116" selection-end="4116" vertical-scroll-proportion="-9.791667" vertical-offset="1880" max-vertical-offset="2550">
               <folding />
             </state>
           </provider>
@@ -35,9 +44,9 @@
       <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="111" selection-start="2292" selection-end="2292" vertical-scroll-proportion="0.33039647" vertical-offset="525" max-vertical-offset="3840">
+            <state line="163" column="57" selection-start="6679" selection-end="6679" vertical-scroll-proportion="0.19823788" vertical-offset="2310" max-vertical-offset="3840">
               <folding>
-                <marker date="1402436588000" expanded="true" signature="1885:1899" placeholder="..." />
+                <marker date="1402437218000" expanded="true" signature="1885:1899" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -665,11 +674,6 @@
         <state line="25" column="65" selection-start="804" selection-end="804" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="435" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/StudentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="152" column="16" selection-start="4584" selection-end="4665" vertical-scroll-proportion="-19.166666" vertical-offset="1820" max-vertical-offset="2550" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/PresenceController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="124" column="107" selection-start="4221" selection-end="4221" vertical-scroll-proportion="-57.291668" vertical-offset="485" max-vertical-offset="2250" />
@@ -725,18 +729,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/StudentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="32" selection-start="4116" selection-end="4116" vertical-scroll-proportion="-9.791667" vertical-offset="1880" max-vertical-offset="2550">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Student.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="55" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-15.416667" vertical-offset="785" max-vertical-offset="1845">
+        <state line="77" column="55" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-48.125" vertical-offset="0" max-vertical-offset="1845">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="111" selection-start="2292" selection-end="2292" vertical-scroll-proportion="0.33039647" vertical-offset="525" max-vertical-offset="3840">
+        <state line="163" column="57" selection-start="6679" selection-end="6679" vertical-scroll-proportion="0.19823788" vertical-offset="2310" max-vertical-offset="3840">
           <folding>
-            <marker date="1402436588000" expanded="true" signature="1885:1899" placeholder="..." />
+            <marker date="1402437218000" expanded="true" signature="1885:1899" placeholder="..." />
           </folding>
         </state>
       </provider>
