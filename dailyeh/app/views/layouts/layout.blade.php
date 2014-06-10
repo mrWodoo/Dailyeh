@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta charset="utf-8">
-    <title>Logowanie do systemu</title>
+    <title><?php
+        if( !isset( $pageTitle ) ) {
+            echo 'Dailyeh';
+        } else {
+            echo htmlspecialchars( $pageTitle ) . ':: Dailyeh';
+        }
+    ?></title>
 
 <?php if( isset( $loginPage ) ) { ?>
     <link href="{{ URL::asset('css/login.css') }}" rel="stylesheet">
@@ -60,7 +66,7 @@
 
 <div class="container">
     <hr>
-    <small>&copy; <a href="mailto:denis.wrobel420@gmail.com">Denis Wróbel</a></small> |
+    <small>&copy; <a href="mailto:denis.wrobel420@gmail.com">Denis Wróbel</a></small> | Powered by <a href="http://laravel.com">Laravel 4</a>
     <small><span class="glyphicon glyphicon-cog"></span> <?php echo memory_get_usage( true) / 1024 / 1024 ?> MiB</small>
 </div>
 

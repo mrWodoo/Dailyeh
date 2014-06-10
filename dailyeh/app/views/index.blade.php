@@ -1,3 +1,7 @@
+<?php
+$pageTitle = 'Indeks';
+?>
+
 @extends('layouts.layout')
 
 @section('content')

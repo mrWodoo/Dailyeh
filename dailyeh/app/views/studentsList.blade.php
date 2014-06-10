@@ -1,3 +1,7 @@
+<?php
+$pageTitle = 'Zarządzanie uczniami';
+?>
+
 @extends('layouts.layout')
 
 @section('content')

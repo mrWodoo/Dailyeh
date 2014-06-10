@@ -1,3 +1,6 @@
+<?php
+$pageTitle = 'Obecności w dniu ' . TranslationHelper::translateDate( $date );
+?>
 @extends('layouts.layout')
 
 @section('content')

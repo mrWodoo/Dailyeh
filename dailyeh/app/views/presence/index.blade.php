@@ -1,3 +1,6 @@
+<?php
+$pageTitle = 'Obecności';
+?>
 @extends('layouts.layout')
 
 @section('content')

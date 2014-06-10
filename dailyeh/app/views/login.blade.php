@@ -1,5 +1,6 @@
 <?php
 $loginPage = true;
+$pageTitle = 'Logowanie';
 ?>
 @extends('layouts.layout')
 
