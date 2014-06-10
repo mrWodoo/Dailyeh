@@ -29,7 +29,7 @@
             <?php
             foreach( $presenceList AS $row ) {
             ?>
-            <tr id="student_<?php echo $row->id; ?>">
+            <tr id="student_<?php echo $row->student; ?>">
                 <td><?php echo htmlspecialchars( $row->name . ' ' . $row->surname ); ?></td>
 
                 <?php

@@ -32,52 +32,58 @@ $( document ).ready( function() {
                     if( error.length > 0 ) {
                         alert( error.text() );
                     } else {
-                        var student = $( data ).find( "student" );
+                        if( $( '#noStudents').length > 0 ) {
+                            window.location = window.location;
+                        } else {
 
-                        var id = $( student ).find( 'id' ).text();
-                        var rowId = 'student_' + id;
+                            var student = $( data ).find( "student" );
 
-                        $( '#students').append( '<tr style="display: none;" id="' + rowId + '"></tr>' );
+                            var id = $( student ).find( 'id' ).text();
+                            var rowId = 'student_' + id;
 
-                        var row = $( '#' + rowId );
+                            $( '#students').append( '<tr style="display: none;" id="' + rowId + '"></tr>' );
 
-                        $.each( student.find( '*' ), function( index, data ) {
-                            // We ignore id
-                            if( data.nodeName != 'id' ) {
-                                $( row ).append( '<td id="' + data.nodeName + '" data-fillable="true"></td>' );
-                                $( row ).find( '#' + data.nodeName ).text( $( data ).text() );
-                            }
-                        } );
+                            var row = $( '#' + rowId );
 
-                        //Add actions
-                        $( row ).append( '<td><div id="beforeEdit">' +
-                            '<button id="buttonEdit" onClick="editStudent( ' + rowId + ' )" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">' +
-                                '<span class="glyphicon glyphicon-cog"></span>' +
-                            '</button>' +
+                            $.each( student.find( '*' ), function( index, data ) {
+                                // We ignore id
+                                if( data.nodeName != 'id' ) {
+                                    $( row ).append( '<td id="' + data.nodeName + '" data-fillable="true"></td>' );
+                                    $( row ).find( '#' + data.nodeName ).text( $( data ).text() );
+                                }
+                            } );
 
-                            ' <button onClick="removeStudent( ' + id + ', \'' + $( '[name="_token"]' ).val() + '\' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">' +
-                                '<span class="glyphicon glyphicon-remove"></span>' +
-                            '</button>' +
-                        '</div>' +
-                        "                        <div id=\"onEdit\">" +
-                        "<button onClick=\"saveStudent( student_" + id + ", " + id + " )\" type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Zapisz\">" +
-                            "<span class=\"glyphicon glyphicon-ok\"></span>" +
-                            "</button> "+
+                            //Add actions
+                            $( row ).append( '<td><div id="beforeEdit">' +
+                                '<button id="buttonEdit" onClick="editStudent( ' + rowId + ' )" type="button" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Edytuj ucznia">' +
+                                    '<span class="glyphicon glyphicon-cog"></span>' +
+                                '</button>' +
 
-                            "<button onClick=\"cancelStudent( student_" + id + " )\" type=\"button\" class=\"btn btn-warning btn-sm\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Anuluj\">" +
-                                "<span class=\"glyphicon glyphicon-remove\"></span>" +
-                            "</button>" +
-                        "</div></td>");
+                                ' <button onClick="removeStudent( ' + id + ', \'' + $( '[name="_token"]' ).val() + '\' )" type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="bottom" title="Usuń ucznia">' +
+                                    '<span class="glyphicon glyphicon-remove"></span>' +
+                                '</button>' +
+                            '</div>' +
+                            "                        <div id=\"onEdit\">" +
+                            "<button onClick=\"saveStudent( student_" + id + ", " + id + " )\" type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Zapisz\">" +
+                                "<span class=\"glyphicon glyphicon-ok\"></span>" +
+                                "</button> "+
+
+                                "<button onClick=\"cancelStudent( student_" + id + " )\" type=\"button\" class=\"btn btn-warning btn-sm\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Anuluj\">" +
+                                    "<span class=\"glyphicon glyphicon-remove\"></span>" +
+                                "</button>" +
+                            "</div></td>");
 
 
-                        $( row ).show( 'slow' );
-                        $( 'html, body' ).animate( { scrollTop: $( row ).offset().top }, 'slow' );
+                            $( row ).show( 'slow' );
+                            $( 'html, body' ).animate( { scrollTop: $( row ).offset().top }, 'slow' );
 
-                        // Reset form inputs
-                        $( '#addStudentForm')[0].reset();
+                            // Reset form inputs
+                            $( '#addStudentForm')[0].reset();
 
-                        // Update counter
-                        $( '#studentsCount').html( $( 'tr' ).length ) - 1;
+                            // Update counter
+                            $( '#studentsCount').html( $( 'tr' ).length ) - 1;
+
+                        }
                     }
                 }
             });

@@ -76,7 +76,7 @@
     } else {
 
     ?>
-    <div class="alert alert-danger"><b>Uwaga!</b> Nie można wyświetlić listy uczniów gdyż jest pusta.</div>
+    <div class="alert alert-danger" id="noStudents"><b>Uwaga!</b> Nie można wyświetlić listy uczniów gdyż jest pusta.</div>
     <?php
 
     }
