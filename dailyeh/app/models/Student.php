@@ -99,6 +99,15 @@ class Student extends Eloquent {
     }
 
     /**
+     * Presece of student
+     *
+     * @return array
+     */
+    public function presence() {
+        return $this->hasMany( 'Presence' );
+    }
+
+    /**
      * Get students' presence list
      * This should be faster than Laravel's models' relations
      *

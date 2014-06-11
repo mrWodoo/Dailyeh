@@ -132,14 +132,37 @@ class PresenceController extends BaseController {
                 $response = Response::make( XMLHelper::ajaxError( 'Taki uczeń nie istnieje!' ) );
             }
 
+            XMLHelper::setHeaders( $response );
 
-            //XMLHelper::setHeaders( $response );
-
-            //return $response;
+            return $response;
         } else {
             // When it's not ajax request
             // we completely do nothing
             return '';
+        }
+    }
+
+    /**
+     * Show student's presence
+     *
+     * @param string $name Slug
+     * @param int $id student id
+     * @return mixed
+     */
+    public function studentPresence( $name, $id ) {
+        $id = (int) $id;
+
+        $student = Student::find( $id );
+
+        if( $student ) {
+            $presence = $student->presence;
+
+            return View::make( 'presence.student', array(
+                'presence' => $presence,
+                'student' => $student
+            ) );
+        } else {
+            return $this->message( 'Taki uczeń nie istnieje!' );
         }
     }
 }

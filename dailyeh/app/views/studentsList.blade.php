@@ -39,7 +39,17 @@ $pageTitle = 'Zarządzanie uczniami';
                     <?php
                     foreach( $student->toShow() AS $column => $translation ) {
                     ?>
-                        <td id="<?php echo $column; ?>" data-fillable="<?php echo ( in_array(  $column, $student->fillables() ) ) ? 'true' : 'false'; ?>"><?php echo htmlspecialchars( $student->$column ); ?></td>
+                        <td id="<?php echo $column; ?>" data-fillable="<?php echo ( in_array(  $column, $student->fillables() ) ) ? 'true' : 'false'; ?>">
+                            <?php
+                                if( $column != 'name' ) {
+                                    echo htmlspecialchars( $student->$column );
+                                } else {
+                                ?>
+                                    <a href="<?php echo URL::to( '/presence/student/' . Str::slug( $student->name . ' ' . $student->surname ) . '/' . $student->id ) ?>"><?php echo htmlspecialchars( $student->$column ); ?></a>
+                                <?php
+                                }
+                            ?>
+                        </td>
                     <?
                     }
                     ?>

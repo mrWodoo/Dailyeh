@@ -22,8 +22,8 @@ Route::get( '/students', 'StudentController@listStudents' );
  * Group routes with CSRF filter
  */
 Route::group( array( 'before' => 'csrf' ), function()  {
-    Route::post( '/students/add', 'StudentController@addStudent');
-    Route::post( '/presence/set', 'PresenceController@setPresence');
+    Route::post( '/students/add', 'StudentController@addStudent' );
+    Route::post( '/presence/set', 'PresenceController@setPresence' );
 });
 
 Route::get( '/logout/{token}', 'AuthController@logout' );
@@ -31,3 +31,6 @@ Route::get( '/students/remove/{id}/{token}', 'StudentController@removeStudent')-
 Route::post( '/students/edit/{id}/{token}', 'StudentController@editStudent')->where('id', '[0-9]+');
 Route::get( '/presence', 'PresenceController@index' );
 Route::get( '/presence/{date}', array( 'as' => 'presenceView', 'uses' => 'PresenceController@view' ) )->where( 'date', '([0-9]{4})\-([0-9]{1,2})\-([0-9]{1,2})' );
+Route::get( '/presence/student/{name}/{id}', 'PresenceController@studentPresence' )->where( array(
+    'name' => '([a-zA-Z0-9\-]{1,128})',
+    'id' => '([0-9]{1,4})' ) );
