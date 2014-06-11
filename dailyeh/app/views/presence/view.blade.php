@@ -33,7 +33,7 @@ $pageTitle = 'Obecności w dniu ' . TranslationHelper::translateDate( $date );
             foreach( $presenceList AS $row ) {
             ?>
             <tr id="student_<?php echo $row->student; ?>">
-                <td><?php echo htmlspecialchars( $row->name . ' ' . $row->surname ); ?></td>
+                <td><a href="<?php echo URL::to( '/presence/student/' . Str::slug( $row->name . ' ' . $row->surname ) . '/' . $row->student ) ?>"><?php echo htmlspecialchars( $row->name . ' ' . $row->surname ); ?></a></td>
 
                 <?php
 
